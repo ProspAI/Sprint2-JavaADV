@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 public class FeedbackRequestDTO {
 
+    private Long id;  // Campo adicionado para identificar a edição
+
     @NotBlank(message = "O título não deve estar em branco")
     private String titulo;
 
@@ -15,4 +17,5 @@ public class FeedbackRequestDTO {
 
     @NotNull(message = "A nota não deve estar em branco")
     private Integer nota;
+
 }

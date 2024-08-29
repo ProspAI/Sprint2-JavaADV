@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 public class ReportRequestDTO {
 
+    private Long id;
+
     @NotBlank(message = "O título não deve estar em branco")
     @Size(max = 100, message = "O título deve ter no máximo 100 caracteres")
     private String titulo;

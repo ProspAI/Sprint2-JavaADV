@@ -1,4 +1,4 @@
-package br.com.fiap.jadv.sprint2.controller;
+package br.com.fiap.jadv.sprint2.controller.api;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +25,7 @@ import br.com.fiap.jadv.sprint2.dto.response.UsuarioResponseDTO;
 import br.com.fiap.jadv.sprint2.service.UsuarioService;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("api/usuarios")
 public class UsuarioController {
 
     @Autowired

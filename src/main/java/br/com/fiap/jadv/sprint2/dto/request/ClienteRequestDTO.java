@@ -8,6 +8,8 @@ import lombok.Data;
 @Data
 public class ClienteRequestDTO {
 
+    private Long id; // Adicione esta linha
+
     @NotBlank
     @Size(max = 100)
     private String nome;

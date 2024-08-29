@@ -1,4 +1,4 @@
-package br.com.fiap.jadv.sprint2.controller;
+package br.com.fiap.jadv.sprint2.controller.api;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +25,7 @@ import br.com.fiap.jadv.sprint2.dto.response.FeedbackResponseDTO;
 import br.com.fiap.jadv.sprint2.service.FeedbackService;
 
 @RestController
-@RequestMapping("/feedbacks")
+@RequestMapping("api/feedbacks")
 public class FeedbackController {
 
     @Autowired
@@ -47,8 +47,8 @@ public class FeedbackController {
     public ResponseEntity<EntityModel<FeedbackResponseDTO>> obterFeedbackPorId(@PathVariable Long id) {
         Optional<FeedbackResponseDTO> feedback = feedbackService.obterFeedbackPorId(id);
         return feedback.map(f -> ResponseEntity.ok(EntityModel.of(f,
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(FeedbackController.class).obterFeedbackPorId(f.getId())).withSelfRel(),
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(FeedbackController.class).obterTodosFeedbacks()).withRel("todos-feedbacks"))))
+                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(FeedbackController.class).obterFeedbackPorId(f.getId())).withSelfRel(),
+                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(FeedbackController.class).obterTodosFeedbacks()).withRel("todos-feedbacks"))))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -64,8 +64,8 @@ public class FeedbackController {
     public ResponseEntity<EntityModel<FeedbackResponseDTO>> atualizarFeedback(@PathVariable Long id, @Validated @RequestBody FeedbackRequestDTO feedbackRequestDTO) {
         Optional<FeedbackResponseDTO> feedbackAtualizado = feedbackService.atualizarFeedback(id, feedbackRequestDTO);
         return feedbackAtualizado.map(f -> ResponseEntity.ok(EntityModel.of(f,
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(FeedbackController.class).obterFeedbackPorId(f.getId())).withSelfRel(),
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(FeedbackController.class).obterTodosFeedbacks()).withRel("todos-feedbacks"))))
+                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(FeedbackController.class).obterFeedbackPorId(f.getId())).withSelfRel(),
+                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(FeedbackController.class).obterTodosFeedbacks()).withRel("todos-feedbacks"))))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 

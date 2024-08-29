@@ -1,4 +1,4 @@
-package br.com.fiap.jadv.sprint2.controller;
+package br.com.fiap.jadv.sprint2.controller.api;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +25,7 @@ import br.com.fiap.jadv.sprint2.dto.response.ClienteResponseDTO;
 import br.com.fiap.jadv.sprint2.service.ClienteService;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("api/clientes")
 public class ClienteController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class ClienteController {
                         WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClienteController.class).obterClientePorId(cliente.getId())).withSelfRel(),
                         WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClienteController.class).obterTodosClientes()).withRel("todos-clientes")))
                 .collect(Collectors.toList());
-        
+
         return ResponseEntity.ok(CollectionModel.of(clientes,
                 WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClienteController.class).obterTodosClientes()).withSelfRel()));
     }
@@ -47,8 +47,8 @@ public class ClienteController {
     public ResponseEntity<EntityModel<ClienteResponseDTO>> obterClientePorId(@PathVariable Long id) {
         Optional<ClienteResponseDTO> cliente = clienteService.obterClientePorId(id);
         return cliente.map(c -> ResponseEntity.ok(EntityModel.of(c,
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClienteController.class).obterClientePorId(c.getId())).withSelfRel(),
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClienteController.class).obterTodosClientes()).withRel("todos-clientes"))))
+                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClienteController.class).obterClientePorId(c.getId())).withSelfRel(),
+                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClienteController.class).obterTodosClientes()).withRel("todos-clientes"))))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -64,8 +64,8 @@ public class ClienteController {
     public ResponseEntity<EntityModel<ClienteResponseDTO>> atualizarCliente(@PathVariable Long id, @Validated @RequestBody ClienteRequestDTO clienteRequestDTO) {
         Optional<ClienteResponseDTO> clienteAtualizado = clienteService.atualizarCliente(id, clienteRequestDTO);
         return clienteAtualizado.map(c -> ResponseEntity.ok(EntityModel.of(c,
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClienteController.class).obterClientePorId(c.getId())).withSelfRel(),
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClienteController.class).obterTodosClientes()).withRel("todos-clientes"))))
+                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClienteController.class).obterClientePorId(c.getId())).withSelfRel(),
+                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClienteController.class).obterTodosClientes()).withRel("todos-clientes"))))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 

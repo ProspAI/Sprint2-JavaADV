@@ -1,0 +1,53 @@
+<!-- Incluir CSS e JavaScript necessários -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<div th:fragment="content" style="background-color: #f5f7fa; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+    <h1 th:text="${#strings.isEmpty(cliente.id) ? 'Novo Cliente' : 'Editar Cliente'}" style="color: #2c3e50; font-size: 28px; font-weight: 700; margin-bottom: 20px; letter-spacing: 1px;"></h1>
+    <form th:action="@{/clientes/salvar}" th:object="${cliente}" method="post" style="display: flex; flex-direction: column; gap: 16px;">
+        <input type="hidden" th:field="*{id}"/>
+
+        <!-- Campo para Nome -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="Nome" style="color: #2c3e50; font-weight: 600; font-size: 16px;">Nome</label>
+            <input type="text" th:field="*{nome}" style="padding: 12px; border-radius: 8px; border: 1px solid #d1d1d6; background-color: #ffffff; font-size: 16px; color: #2c3e50; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); transition: border-color 0.3s ease;" required onfocus="this.style.borderColor='#2c3e50';" onblur="this.style.borderColor='#d1d1d6';"/>
+            <div th:if="${#fields.hasErrors('Nome')}" th:errors="*{nome}" style="color: #e74c3c; font-size: 14px;"></div>
+        </div>
+
+        <!-- Campo de Email com Validação -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="email" style="color: #2c3e50; font-weight: 600; font-size: 16px;">Email</label>
+            <input type="email" th:field="*{email}" style="padding: 12px; border-radius: 8px; border: 1px solid #d1d1d6; background-color: #ffffff; font-size: 16px; color: #2c3e50; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); transition: border-color 0.3s ease;" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" onfocus="this.style.borderColor='#2c3e50';" onblur="this.style.borderColor='#d1d1d6';" placeholder="exemplo@dominio.com"/>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: #e74c3c; font-size: 14px;"></div>
+        </div>
+
+        <!-- Campo de Telefone com Seleção de País -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="telefone" style="color: #2c3e50; font-weight: 600; font-size: 16px;">Telefone</label>
+            <input id="telefone" type="tel" th:field="*{telefone}" style="padding: 12px; border-radius: 8px; border: 1px solid #d1d1d6; background-color: #ffffff; font-size: 16px; color: #2c3e50; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); transition: border-color 0.3s ease;" required/>
+            <div th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" style="color: #e74c3c; font-size: 14px;"></div>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div style="display: flex; justify-content: flex-start; gap: 16px; margin-top: 20px;">
+            <button type="submit" style="background-color: #27ae60; color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; border: none; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease;" onmouseover="this.style.backgroundColor='#1e8449'; this.style.transform='scale(1.05)'" onmouseout="this.style.backgroundColor='#27ae60'; this.style.transform='scale(1)'">Salvar</button>
+            <a th:href="@{/clientes}" style="background-color: #e74c3c; color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block; transition: background-color 0.3s ease, transform 0.2s ease;" onmouseover="this.style.backgroundColor='#c0392b'; this.style.transform='scale(1.05)'" onmouseout="this.style.backgroundColor='#e74c3c'; this.style.transform='scale(1)'">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<!-- Script para inicializar o campo de telefone com seleção de país -->
+<script>
+    const input = document.querySelector("#telefone");
+    const iti = window.intlTelInput(input, {
+        initialCountry: "auto",
+        separateDialCode: true,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+    });
+
+    // Atualizar o campo de telefone no backend com o código do país
+    document.querySelector("form").addEventListener("submit", function() {
+        input.value = iti.getNumber();
+    });
+</script>

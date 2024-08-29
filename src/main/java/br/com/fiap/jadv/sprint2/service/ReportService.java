@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.jadv.sprint2.controller.ReportController;
+import br.com.fiap.jadv.sprint2.controller.api.ReportController;
 import br.com.fiap.jadv.sprint2.dto.request.ReportRequestDTO;
 import br.com.fiap.jadv.sprint2.dto.response.ReportResponseDTO;
 import br.com.fiap.jadv.sprint2.entity.Report;

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.jadv.sprint2.controller.SalesStrategyController;
+import br.com.fiap.jadv.sprint2.controller.api.SalesStrategyController;
 import br.com.fiap.jadv.sprint2.dto.request.SalesStrategyRequestDTO;
 import br.com.fiap.jadv.sprint2.dto.response.SalesStrategyResponseDTO;
 import br.com.fiap.jadv.sprint2.entity.SalesStrategy;

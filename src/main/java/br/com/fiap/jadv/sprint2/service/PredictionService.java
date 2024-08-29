@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.jadv.sprint2.controller.PredictionController;
+import br.com.fiap.jadv.sprint2.controller.api.PredictionController;
 import br.com.fiap.jadv.sprint2.dto.request.PredictionRequestDTO;
 import br.com.fiap.jadv.sprint2.dto.response.PredictionResponseDTO;
 import br.com.fiap.jadv.sprint2.entity.Prediction;

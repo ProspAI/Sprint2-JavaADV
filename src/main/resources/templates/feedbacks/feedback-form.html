@@ -1,0 +1,33 @@
+<div th:fragment="content" style="background-color: #f5f7fa; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+    <h1 th:text="${#strings.isEmpty(feedback.id) ? 'Novo Feedback' : 'Editar Feedback'}" style="color: #2c3e50; font-size: 28px; font-weight: 700; margin-bottom: 20px; letter-spacing: 1px;"></h1>
+    <form th:action="@{/feedbacks/salvar}" th:object="${feedback}" method="post" style="display: flex; flex-direction: column; gap: 16px;">
+        <input type="hidden" th:field="*{id}"/>
+
+        <!-- Campo para Título -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="titulo" style="color: #2c3e50; font-weight: 600; font-size: 16px;">Título</label>
+            <input type="text" th:field="*{titulo}" style="padding: 12px; border-radius: 8px; border: 1px solid #d1d1d6; background-color: #ffffff; font-size: 16px; color: #2c3e50; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); transition: border-color 0.3s ease;" required onfocus="this.style.borderColor='#2c3e50';" onblur="this.style.borderColor='#d1d1d6';"/>
+            <div th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" style="color: #e74c3c; font-size: 14px;"></div>
+        </div>
+
+        <!-- Campo para Descrição -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="descricao" style="color: #2c3e50; font-weight: 600; font-size: 16px;">Descrição</label>
+            <textarea th:field="*{descricao}" style="padding: 12px; border-radius: 8px; border: 1px solid #d1d1d6; background-color: #ffffff; font-size: 16px; color: #2c3e50; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); transition: border-color 0.3s ease;" required onfocus="this.style.borderColor='#2c3e50';" onblur="this.style.borderColor='#d1d1d6';"></textarea>
+            <div th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}" style="color: #e74c3c; font-size: 14px;"></div>
+        </div>
+
+        <!-- Campo para Nota -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="nota" style="color: #2c3e50; font-weight: 600; font-size: 16px;">Nota</label>
+            <input type="number" th:field="*{nota}" min="1" max="5" style="padding: 12px; border-radius: 8px; border: 1px solid #d1d1d6; background-color: #ffffff; font-size: 16px; color: #2c3e50; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); transition: border-color 0.3s ease;" required onfocus="this.style.borderColor='#2c3e50';" onblur="this.style.borderColor='#d1d1d6';"/>
+            <div th:if="${#fields.hasErrors('nota')}" th:errors="*{nota}" style="color: #e74c3c; font-size: 14px;"></div>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div style="display: flex; justify-content: flex-start; gap: 16px; margin-top: 20px;">
+            <button type="submit" style="background-color: #27ae60; color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; border: none; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease;" onmouseover="this.style.backgroundColor='#1e8449'; this.style.transform='scale(1.05)'" onmouseout="this.style.backgroundColor='#27ae60'; this.style.transform='scale(1)'">Salvar</button>
+            <a th:href="@{/feedbacks}" style="background-color: #e74c3c; color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block; transition: background-color 0.3s ease, transform 0.2s ease;" onmouseover="this.style.backgroundColor='#c0392b'; this.style.transform='scale(1.05)'" onmouseout="this.style.backgroundColor='#e74c3c'; this.style.transform='scale(1)'">Cancelar</a>
+        </div>
+    </form>
+</div>

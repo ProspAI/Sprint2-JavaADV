@@ -5,10 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.jadv.sprint2.controller.FeedbackController;
 import br.com.fiap.jadv.sprint2.dto.request.FeedbackRequestDTO;
 import br.com.fiap.jadv.sprint2.dto.response.FeedbackResponseDTO;
 import br.com.fiap.jadv.sprint2.entity.Feedback;
@@ -56,9 +54,6 @@ public class FeedbackService {
         feedbackResponseDTO.setDescricao(feedback.getDescricao());
         feedbackResponseDTO.setNota(feedback.getNota());
 
-        // Adicionando links HATEOAS
-        feedbackResponseDTO.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(FeedbackController.class).obterFeedbackPorId(feedback.getId())).withSelfRel());
-        feedbackResponseDTO.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(FeedbackController.class).obterTodosFeedbacks()).withRel("todos-feedbacks"));
 
         return feedbackResponseDTO;
     }

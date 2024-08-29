@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.jadv.sprint2.controller.UsuarioController;
+import br.com.fiap.jadv.sprint2.controller.api.UsuarioController;
 import br.com.fiap.jadv.sprint2.dto.request.UsuarioRequestDTO;
 import br.com.fiap.jadv.sprint2.dto.response.UsuarioResponseDTO;
 import br.com.fiap.jadv.sprint2.entity.Usuario;
