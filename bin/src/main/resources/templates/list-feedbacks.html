@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Feedbacks</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Lista de Feedbacks</h1>
+<a th:href="@{/feedbacks/novo}">Novo Feedback</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Descrição</th>
+        <th>Nota</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="feedback : ${feedbacks}">
+        <td th:text="${feedback.id}"></td>
+        <td th:text="${feedback.titulo}"></td>
+        <td th:text="${feedback.descricao}"></td>
+        <td th:text="${feedback.nota}"></td>
+        <td>
+            <a th:href="@{/feedbacks/{id}/editar(id=${feedback.id})}">Editar</a>
+            <a th:href="@{/feedbacks/{id}/deletar(id=${feedback.id})}" onclick="return confirm('Tem certeza que deseja deletar?')">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
